@@ -3,6 +3,7 @@ import { IoSearchOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import avaterImg from "../assets/avatar.png";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
     const navigation =[
@@ -24,9 +25,11 @@ const Navbar = () => {
         }
     ]
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-    const user = true;
+    const user = false;
+    const cartItems = useSelector(state => state.cart.cartItems);
+    console.log(cartItems);
   return (
-    <header className="max-w-screen-2xl mx-auto px-40 py-6">
+    <header className=" max-w-screen-2xl mx-auto md:px-40 px-5 py-6 font-primary">
       <nav className="flex justify-between items-center">   
         <div className="flex items-center md:gap-16 gap-4">
           <Link to="/">
@@ -67,8 +70,10 @@ const Navbar = () => {
             }
             {/* <HiOutlineUser className="size-6" /> */}
             <button className=""> <HiOutlineHeart className="size-6 hidden sm:block"/> </button>
-            <Link to="/cart" className="bg-primary p-1 sm:px-6 px-2 flex items-center rounded-sm"><HiOutlineShoppingCart/>
-            <span className="text-sm font-semibold sm:ml-1">0</span>
+            <Link to="/cart" className="bg-primary p-1 sm:px-4 px-2 flex items-center rounded-sm"><HiOutlineShoppingCart/>
+            <span className="text-sm font-semibold sm:ml-1">
+                {cartItems.length}
+            </span>
             </Link>
         </div>
       </nav>

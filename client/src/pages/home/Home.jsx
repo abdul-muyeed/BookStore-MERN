@@ -1,9 +1,19 @@
-
+import Footer from "../../components/Footer";
+import Banner from "./Banner";
+import News from "./News";
+import Recommended from "./Recommended";
+import TopSellers from "./TopSellers";
 
 const Home = () => {
   return (
-    <div>Home</div>
-  )
-}
+    <>
+      <Banner />
+      <TopSellers />
+      <Recommended />
+      <News />
+      
+    </>
+  );
+};
 
-export default Home
+export default Home;
