@@ -1,4 +1,4 @@
-import { Schema } from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 const bookSchema = new Schema(
   {
@@ -14,7 +14,7 @@ const bookSchema = new Schema(
       type: String,
       required: true,
     },
-    tranding: {
+    trending: {
       type: Boolean,
       required: true,
     },
