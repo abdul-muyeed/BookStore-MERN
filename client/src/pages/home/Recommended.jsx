@@ -5,18 +5,13 @@ import { Pagination, Navigation } from "swiper/modules";
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
-import { useEffect, useState } from 'react';
 import BookCard from '../book/BookCard';
+import { useGetBooksQuery } from '../../store/features/books/bookApi';
 
 
 const Recommended = () => {
-    const [books, setBooks] = useState([]);
-    useEffect(() => {   
-        fetch("book.json")
-          .then((res) => res.json())
-          .then((data) => setBooks(data));
-        // console.log(books);
-      }, []);
+    const { data: books = [] } = useGetBooksQuery();
+   
   return (
     <>
         <div className="py-10">

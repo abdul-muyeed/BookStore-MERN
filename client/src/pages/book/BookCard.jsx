@@ -8,6 +8,7 @@ import { addToCart } from '../../store/features/cart/cartSlice.js';
 
 const BookCard = ({book}) => {
     // console.log(getImgUrl(book.coverImage));
+    // console.log(book._id)
     const dispatch = useDispatch();
     const handleAddToCart = () => {
         dispatch(addToCart(book));
@@ -17,7 +18,7 @@ const BookCard = ({book}) => {
       <div className=" rounded-lg transition-shadow duration-300">
         <div className="flex flex-col sm:flex-row sm:items-center sm:h-72  sm:justify-center gap-4">
           <div className="sm:h-72 sm:flex-shrink-0 border rounded-md">
-            <Link to={`/book/${book.id}`}>
+            <Link to={`/book/${book._id}`}>
               <img
                 src={getImgUrl(book.coverImage)}
                 alt=""
@@ -27,7 +28,7 @@ const BookCard = ({book}) => {
           </div>
 
           <div>
-            <Link to={`/book/${book.id}`}>
+            <Link to={`/book/${book._id}`}>
               <h3 className="text-lg font-semibold hover:text-blue-600 mb-2">
                 {book.title}
               </h3>

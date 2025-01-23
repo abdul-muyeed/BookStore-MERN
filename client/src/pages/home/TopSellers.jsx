@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import BookCard from "../book/BookCard";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper/modules";
@@ -7,21 +6,19 @@ import { Pagination, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+import { useGetBooksQuery } from "../../store/features/books/bookApi";
+import { useEffect, useState } from "react";
 
 const TopSellers = () => {
-  const [books, setBooks] = useState([]);
+  // const [books, setBooks] = useState([]);
+  const { data: books = [] } = useGetBooksQuery();
   const [filteredBooks, setFilteredBooks] = useState([]);
   const category = ["Choose a genre", "business", "books", "romance"];
-  useEffect(() => {
-    fetch("book.json")
-      .then((res) => res.json())
-      .then((data) => {
-        setBooks(data);
-        setFilteredBooks(data);
-      });
 
-    // console.log(books);
-  }, []);
+  useEffect(() => {
+    if (books.length !== 0) setFilteredBooks(books);
+  }, [books]);
+
   const filterBooks = (e) => {
     const value = e.target.value;
 
@@ -31,6 +28,7 @@ const TopSellers = () => {
         : books.filter((book) => book.category === value);
     setFilteredBooks(filteredBooks);
   };
+
   return (
     <>
       <div className="py-10">

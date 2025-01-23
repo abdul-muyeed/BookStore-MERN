@@ -5,40 +5,50 @@ import Login from "../components/Login";
 import Register from "../components/Register";
 import CartPage from "../pages/book/cartPage";
 import CheckoutPage from "../pages/book/CheckoutPage";
+import SignleBook from "../pages/home/SignleBook";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <App />,
-      children: [
-        {
-            path: "/",
-            element: <Home />,
-        },
-        {
-            path: "/about",
-            element: <h1>about</h1>,
-        },
-        {
-            path: "/order",
-            element: <h1>order</h1>,
-        },
-        {
-          path: "login",
-          element: <Login />,
-        },
-        {
-          path: "register",
-          element: <Register />,
-        },
-        {
-          path: "cart",
-          element: <CartPage />,
-        },
-        {
-          path: "checkout",
-          element: <CheckoutPage />,
-        }
-      ]
-    },
-  ]);
+  {
+    path: "/",
+    element: <App />,
+    children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
+      {
+        path: "/about",
+        element: <h1>about</h1>,
+      },
+      {
+        path: "/order",
+        element: <h1>order</h1>,
+      },
+      {
+        path: "login",
+        element: <Login />,
+      },
+      {
+        path: "register",
+        element: <Register />,
+      },
+      {
+        path: "cart",
+        element: <CartPage />,
+      },
+      {
+        path: "checkout",
+        element: (
+          <PrivateRoute>
+            <CheckoutPage />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "book/:id",
+        element: <SignleBook />,
+      },
+    ],
+  },
+]);

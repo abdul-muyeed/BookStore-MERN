@@ -3,7 +3,8 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import bookRoute from "./src/books/book.route.js";
 import cors from "cors";
-import e from "express";
+import morgan from "morgan";
+
 
 dotenv.config();
 const app = express();
@@ -11,10 +12,11 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 app.use(cors(
     {
-        origin: ["*"],
+        origin: "http://localhost:5173",
         credentials: true,
     }
 ));
+app.use(morgan("dev"));
 
 app.get("/", (req, res) => {
   res.send("Hello World!");

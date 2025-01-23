@@ -1,4 +1,4 @@
-import Footer from "../../components/Footer";
+// import Footer from "../../components/Footer";
 import Banner from "./Banner";
 import News from "./News";
 import Recommended from "./Recommended";

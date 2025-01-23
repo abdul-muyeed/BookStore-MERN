@@ -1,10 +1,15 @@
 import  { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaGoogle } from "react-icons/fa";
 import { useForm } from "react-hook-form"
+import { useAuth } from "../context/AuthContext";
+
+
 
 const Login = () => {
   const [message, setMessage] = useState("");
+  const {loginUser, signinWithGoogle} = useAuth()
+  const navigate = useNavigate()
   const {
     register,
     handleSubmit,
@@ -12,9 +17,25 @@ const Login = () => {
     formState: { errors },
   } = useForm()
 
-  const onSubmit = (data) => console.log(data)
-  const handleGoogleLogin = () => {
+  const onSubmit = async (data) => {
+    console.log(data)
+    try {
+      await loginUser(data.email, data.password)
+      alert("User Logged in Successfully")
+      navigate("/")
+    } catch (e) {
+
+      setMessage(e.message)
+    }
+  }
+  const handleGoogleLogin = async () => {
     console.log("Google Login")
+    try {
+      await signinWithGoogle()
+    } catch (e) {
+      setMessage(e.message)
+      
+    }
   }
 
   console.log(watch("example")) // watch input value by passing the name of it
@@ -68,7 +89,7 @@ const Login = () => {
             </Link>
           </p>
           <div className="mt-5">
-            <button onClick={()=> handleGoogleLogin} className="w-full flex flex-wrap font-bold gap-1 items-center justify-center bg-secondary hover:bg-blue-500 text-white border border-gray-300 p-2 rounded-md mt-4">
+            <button onClick={handleGoogleLogin} className="w-full flex flex-wrap font-bold gap-1 items-center justify-center bg-secondary hover:bg-blue-500 text-white border border-gray-300 p-2 rounded-md mt-4">
               <FaGoogle className="text-xl  " />
               <span className="">Login with Google</span>
               

@@ -2,9 +2,12 @@ import  { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaGoogle } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+
 
 const Register = () => {
   const [message, setMessage] = useState("");
+  const {registerUser, signinWithGoogle} = useAuth()
     const {
       register,
       handleSubmit,
@@ -12,12 +15,26 @@ const Register = () => {
       formState: { errors },
     } = useForm()
   
-    const onSubmit = (data) => console.log(data)
-    const handleGoogleLogin = () => {
+    const onSubmit = async (data) => {
+      try {
+        await registerUser(data.email, data.password)
+        alert("User Registered Successfully")
+      } catch (e) {
+        setMessage(e.message)
+        
+      }
+    }
+    const handleGoogleLogin = async () => {
       console.log("Google Login")
+      try {
+        await signinWithGoogle()
+      } catch (e) {
+        setMessage(e.message)
+        
+      }
     }
   
-    console.log(watch("example")) // watch input value by passing the name of it
+    // console.log(watch("example")) // watch input value by passing the name of it
   return (
     <>
       <div className="h-[calc(100vh-120px)] border">
@@ -71,7 +88,7 @@ const Register = () => {
           </p>
           <div className="mt-5">
             <button
-              onClick={() => handleGoogleLogin}
+              onClick={handleGoogleLogin}
               className="w-full flex flex-wrap font-bold gap-1 items-center justify-center bg-secondary hover:bg-blue-500 text-white border border-gray-300 p-2 rounded-md mt-4"
             >
               <FaGoogle className="text-xl  " />
