@@ -22,6 +22,7 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 app.use("/api/books/", bookRoute);
+app.use("/api/orders/", orderRoute);
 
 app.listen(port, async () => {
     const data = await mongoose.connect(`${process.env.DB_URL}`);
