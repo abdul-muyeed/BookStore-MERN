@@ -1,6 +1,6 @@
 import { Book } from "./book.model.js";
 
-const createBook = async (req, res) => {
+export const createBook = async (req, res) => {
   try {
     const newBook = await Book.create(req.body);
     return res.status(201).send(newBook);
@@ -9,7 +9,7 @@ const createBook = async (req, res) => {
   }
 };
 
-const getBooks = async (req, res) => {
+export const getBooks = async (req, res) => {
   try {
     const books = await Book.find().sort({ createdAt: -1 });
     return res.status(200).send(books);
@@ -17,7 +17,7 @@ const getBooks = async (req, res) => {
     return res.status(500).send(e.message);
   }
 };
-const getBook = async (req, res) => {
+export const getBook = async (req, res) => {
   try {
     const book = await Book.findById(req.params.id);
     if (!book) return res.status(404).send("Book not found");
@@ -27,7 +27,7 @@ const getBook = async (req, res) => {
   }
 };
 
-const updateBook = async (req, res) => {
+export const updateBook = async (req, res) => {
   try {
     const updatedBook = await Book.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
@@ -39,7 +39,7 @@ const updateBook = async (req, res) => {
   }
 };
 
-const deleteBook = async (req, res) => {
+export const deleteBook = async (req, res) => {
   try {
     const book = await Book.findByIdAndDelete(req.params.id);
     if (!book) return res.status(404).send("Book not found");
@@ -49,4 +49,4 @@ const deleteBook = async (req, res) => {
   }
 };
 
-export { createBook, getBooks, getBook, updateBook, deleteBook };
+

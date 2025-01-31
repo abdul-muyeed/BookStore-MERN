@@ -4,11 +4,17 @@ import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { useAuth } from '../../context/AuthContext';
+import { useCreateOrderMutation } from '../../store/features/orders/orderApi';
 
 const CheckoutPage = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const onSubmit = data => {
-        console.log(data);
+    const {currentUser} = useAuth()
+    const cartItems = useSelector((state) => state.cart.cartItems);
+    const[createOrder,{isLoading}] = useCreateOrderMutation();
+    // console.log(currentUser)
+    const onSubmit = async data => {
+        
         if(!isChecked){
             Swal.fire({
                 icon: 'error',
@@ -28,16 +34,28 @@ const CheckoutPage = () => {
                 state: data.state,
                 zipcode: data.zipcode
             },
-            city: data.city,
-            country: data.country,
-            state: data.state,
-            zipcode: data.zipcode,
+            orderItems: cartItems.map(item => item?._id),
+            totalPrice: cartItems.reduce((total, item) => {
+                return total + item.newPrice;
+              }, 0)
 
         }
         console.log(newOrder);
+        try{
+            await createOrder(newOrder).unwrap();
+            Swal.fire({
+                icon: 'success',
+                title: 'Order Placed Successfully',
+                showConfirmButton: false,
+                timer: 1500
+                })
+        }catch(e){
+            console.log(e)
+            alert('Something went wrong')
+        }
     }
     const [isChecked, setIsChecked] = useState(false);
-    const cartItems = useSelector(state => state.cart.cartItems);
+    if(isLoading) return <div>Loading...</div>
   return (
     <>
     <div className="min-h-screen p-6 bg-gray-100 flex items-center justify-center">
@@ -74,7 +92,7 @@ const CheckoutPage = () => {
                                         {...register("email", { required: true })}
                                         type="text" name="email" id="email" className="h-10 border mt-1 rounded px-4 w-full bg-gray-50" 
                                         disabled
-                                        defaultValue={"exaplam.@gmail.com"}
+                                        defaultValue={currentUser.email}
                                         placeholder="email@domain.com" />
                                 </div>
                                 <div className="md:col-span-5">

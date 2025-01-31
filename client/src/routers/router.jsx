@@ -7,6 +7,9 @@ import CartPage from "../pages/book/cartPage";
 import CheckoutPage from "../pages/book/CheckoutPage";
 import SignleBook from "../pages/home/SignleBook";
 import PrivateRoute from "./PrivateRoute";
+import OrderPage from "../pages/book/OrderPage";
+import AdminRoute from "./AdminRoute";
+import AdminLogin from "../components/AdminLogin";
 
 export const router = createBrowserRouter([
   {
@@ -23,7 +26,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/order",
-        element: <h1>order</h1>,
+        element: (
+          <PrivateRoute>
+            <OrderPage />
+          </PrivateRoute>
+        ),
       },
       {
         path: "login",
@@ -50,5 +57,25 @@ export const router = createBrowserRouter([
         element: <SignleBook />,
       },
     ],
-  },
+  },{
+    path:"/dashboard",
+    element: <AdminRoute><div>Admin Dashboard</div></AdminRoute>,
+    children:[
+      {
+        path:"add-new-book",
+        element: <AdminRoute><div>Add new booj</div></AdminRoute>
+      },
+      {
+        path:"edit-book/:id",
+        element:<AdminRoute><div>Edit Book</div></AdminRoute>
+      },
+      {
+        path:"manage-books",
+        element: <AdminRoute><div>Manage Book</div></AdminRoute>
+      }
+    ]
+  },{
+    path:"/admin",
+    element: <AdminLogin/> ,
+  }
 ]);

@@ -2,8 +2,12 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import bookRoute from "./src/books/book.route.js";
+import orderRoute from "./src/orders/order.route.js";
+import userRoute from "./src/users/user.route.js"
+import adminStatsRoute from "./src/stats/admin.stats.js";
 import cors from "cors";
 import morgan from "morgan";
+
 
 
 dotenv.config();
@@ -23,9 +27,12 @@ app.get("/", (req, res) => {
 });
 app.use("/api/books/", bookRoute);
 app.use("/api/orders/", orderRoute);
+app.use("/api/auth/", userRoute);
+app.use("/api/stats/", adminStatsRoute);
 
 app.listen(port, async () => {
+    console.log(`Server is running on port http://localhost:${port}`);
     const data = await mongoose.connect(`${process.env.DB_URL}`);
     console.log("Connected to MongoDB " + data.connection.host);
-    console.log(`Server is running on port http://localhost:${port}`);
+    
 });

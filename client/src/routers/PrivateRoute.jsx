@@ -4,7 +4,8 @@ import { useAuth } from "../context/AuthContext"
 
 
 const PrivateRoute = ({children}) => {
-    const {currentUser} = useAuth()
+    const {currentUser, isLoading} = useAuth()
+    if(isLoading) return <h1>Loading...</h1>
     if(currentUser){
         return children;
     }else{

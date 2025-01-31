@@ -7,8 +7,9 @@ const orderSchema = new mongoose.Schema(
     address: { 
         street: { type: String, required: true },
         city: { type: String, required: true },
-        postalCode: { type: String, required: true },
+        zipcode: { type: String, required: true },
         country: { type: String, required: true },
+        state: { type: String, required: true },
      },
      phone: { type: String, required: true },
     orderItems: [
@@ -19,7 +20,6 @@ const orderSchema = new mongoose.Schema(
       },
     ],
     totalPrice: { type: Number, required: true },
-    paymentMethod: { type: String, required: true },
 
 
   },

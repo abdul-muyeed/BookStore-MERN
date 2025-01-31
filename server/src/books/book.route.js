@@ -1,10 +1,11 @@
 import express from "express";
 import { createBook, deleteBook, getBook, getBooks, updateBook } from "./book.controller.js";
+import { verifyAdminToken } from "../middleware/verfiyAdminToken.js";
 
 const router = express.Router();
 
 // create a new book
-router.post("/create-book", createBook )
+router.post("/create-book", verifyAdminToken, createBook )
 
 // get all books
 
