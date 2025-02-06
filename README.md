@@ -10,6 +10,8 @@ A full-stack web application for managing and browsing books, built with the MER
 - **Edit Book**: Modify existing book information
 - **Book Details**: View comprehensive information about specific books
 - **Delete Book**: Remove books from the database
+- **Checkout Page**: Complete the purchase of selected books
+- **Order Page**: View and manage your orders
 
 ### Core Functionality
 - CRUD operations for books
