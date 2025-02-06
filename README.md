@@ -56,31 +56,36 @@ git clone https://github.com/yourusername/mern-BookStore-app.git
 cd mern-BookStore-app
 ```
 
+### Backend
+
 2. Install backend dependencies
 ```bash
 cd server
 npm install
 ```
 
-3. Install frontend dependencies
-```bash
-cd ../client
-npm install
-```
-
-4. Create a .env file in the server directory
+3. Create a .env file in the server directory
 ```env
 PORT=5555
 MONGODB_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret
 ```
 
-5. Start the application
+4. Start the backend
 ```bash
-# Start backend (from server directory)
 npm run dev
+```
 
-# Start frontend (from client directory)
+### Frontend
+
+5. Install frontend dependencies
+```bash
+cd ../client
+npm install
+```
+
+6. Start the frontend
+```bash
 npm run dev
 ```
 
