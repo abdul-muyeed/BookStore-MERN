@@ -26,7 +26,10 @@ A full-stack web application for managing and browsing books, built with the MER
 - Axios for API requests
 - Material-UI components
 - React Router for navigation
-- Context API for state management
+- Redux Toolkit for state management
+- Tailwind CSS for styling
+- Chart.js for data visualization
+- Firebase for authentication and storage
 
 ### Backend
 - Node.js
@@ -34,6 +37,7 @@ A full-stack web application for managing and browsing books, built with the MER
 - MongoDB
 - Mongoose ODM
 - REST API
+- JWT for authentication
 
 ## 🏁 Getting Started
 
@@ -52,46 +56,35 @@ cd mern-BookStore-app
 
 2. Install backend dependencies
 ```bash
-cd backend
+cd server
 npm install
 ```
 
 3. Install frontend dependencies
 ```bash
-cd frontend
+cd ../client
 npm install
 ```
 
-4. Create a .env file in the backend directory
+4. Create a .env file in the server directory
 ```env
 PORT=5555
 MONGODB_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
 ```
 
 5. Start the application
 ```bash
-# Start backend (from backend directory)
-npm start
+# Start backend (from server directory)
+npm run dev
 
-# Start frontend (from frontend directory)
-npm start
+# Start frontend (from client directory)
+npm run dev
 ```
 
-The application will be available at `http://localhost:3000`
+## 🎥 Demo Video Demo
 
-## 🎥 Demo
-
-### Live Demo
-[View Live Demo](your-deployed-app-url)
-
-### Video Demo
 [Watch Demo Video](your-demo-video-url)
-
-## 📸 Screenshots
-
-![Home Page](path-to-homepage-screenshot)
-![Add Book](path-to-add-book-screenshot)
-![Book Details](path-to-book-details-screenshot)
 
 ## 🤝 Contributing
 
@@ -100,16 +93,6 @@ The application will be available at `http://localhost:3000`
 3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## 👤 Author
-
-Your Name
-- GitHub: [@yourusername](https://github.com/yourusername)
-- LinkedIn: [Your Name](https://linkedin.com/in/yourprofile)
 
 ## ⭐️ Show your support
 
